@@ -1,0 +1,59 @@
+<html>
+
+<body>
+
+    <div class=" titulo">
+        <h1>The Movie Database Movies Only</h1>
+    </div>
+
+    <div class="search-container">
+        <div class="search-bar">
+            <h1>Título</h1>
+            <input type="text" [(ngModel)]="searchText" placeholder="Buscar película...">
+            <button (click)="search()">Buscar</button>
+        </div>
+
+
+    </div>
+
+    <div class="movie-container">
+        <div class="movie-list">
+
+            <ul>
+                <li *ngFor="let movie of (filtradoPelicula.length > 0 ? filtradoPelicula : movies); let i = index" [ngClass]="{ 'selected-movie': i === selectedMovieIndex, selected: movie.id === selectedMovieId }" (click)="selectMovie(movie.id)">
+
+                    <div class="movie-item">
+                        <h2>{{ movie.title }}</h2>
+                    </div>
+                </li>
+
+
+            </ul>
+        </div>
+        <div class="movie-details">
+            <div class="movie-details-title">
+                <h1>Detalles de Película</h1>
+            </div>
+            <div style="height: 50px;"></div>
+            <!-- espacio de 50px -->
+            <div *ngIf="selectedMovie">
+                <h2>{{ selectedMovie.title }}</h2>
+                <div class="movie-details-content">
+                    <div class="movie-details-img">
+                        <img [src]="'https://image.tmdb.org/t/p/w500/' + selectedMovie.poster_path" alt="{{ selectedMovie.title }} poster">
+                    </div>
+                    <div class="movie-details-text">
+                        <p><strong>Nombre:</strong> {{ selectedMovie.title }}</p>
+                        <p><strong>Fecha:</strong> {{ selectedMovie.release_date }}</p>
+                        <p><strong>Idioma:</strong> {{ selectedMovie.original_language }}</p>
+                        <p><strong>Descripción:</strong> {{ selectedMovie.overview }}</p>
+                        <p><strong>Rating:</strong> {{ selectedMovie.vote_average }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>
